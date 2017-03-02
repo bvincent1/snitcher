@@ -2,20 +2,19 @@
 <script>
   function main() {
     console.log("As above, so bellow");
-    var endpoint = "";
+    const endpoint = "https://8ohm943ypd.execute-api.us-east-1.amazonaws.com/dev/snitch";
 
     var ref = getParameterByName("ref");
     if (ref) {
       mutateLinks("ref=" + ref + "&");
     }
 
-
-
     $.getJSON("https://httpbin.org/ip").done(function (data) {
       var view = {};
       view.origin = data.origin;
       view.ref = getParameterByName("ref");
       view.date = Date.now();
+      view.href = window.location.href;
 
       $.post(endpoint, JSON.stringify(view));
     });
