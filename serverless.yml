@@ -12,10 +12,7 @@ provider:
       Action:
         - dynamodb:Query
         - dynamodb:Scan
-        - dynamodb:GetItem
         - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 
 functions:
@@ -25,14 +22,6 @@ functions:
       - http:
           path: snitch
           method: post
-          cors: true
-
-  update:
-    handler: snitch/update.update
-    events:
-      - http:
-          path: snitch/{id}
-          method: put
           cors: true
 
 resources:
