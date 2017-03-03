@@ -1,7 +1,7 @@
 'use strict';
 
 const uuid = require('uuid');
-const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
+const AWS = require('aws-sdk');
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
@@ -30,6 +30,9 @@ module.exports.create = (event, context, callback) => {
     // create a response
     const response = {
       statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin" : "*" // Required for CORS support to work
+      },
       body: JSON.stringify(result.Item),
     };
     callback(null, response);
