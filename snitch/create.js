@@ -8,13 +8,21 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 module.exports.create = (event, context, callback) => {
   const timestamp = Date.now();
   const data = JSON.parse(event.body);
-
   const params = {
     TableName: process.env.DYNAMODB_TABLE,
+
     Item: {
       id: uuid.v1(),
-      view: data,
-      createdAt: timestamp
+      origin: data.origin,
+      ref: data.ref,
+      href: data.href,
+      city: data.city,
+      country: data.country,
+      isp: data.isp,
+      lon: data.lon,
+      lat: data.lat,
+      timezone: data.timezone,
+      zip: data.zip
     },
   };
 
